@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <style>
+         html, body, #jsdos {
+             width: 100%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+        </style>
+        <script src="https://js-dos.com/v7/build/releases/latest/js-dos/js-dos.js"></script>
+        <link href="https://js-dos.com/v7/build/releases/latest/js-dos/js-dos.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="jsdos" />
+        <script>
+         emulators.pathPrefix = "https://js-dos.com/v7/build/releases/latest/js-dos/";
+         Dos(document.getElementById("jsdos"))
+             .run("https://doszone-uploads.s3.dualstack.eu-central-1.amazonaws.com/original/2X/2/24b00b14f118580763440ecaddcc948f8cb94f14.jsdos");
+        </script>
+           
+    <script src="/bundle/jquery-migration2.js"></script>
+<script>
+        var emulatorJs = DosBoxLoader.emulatorJS("https://playminigames.ru/js/inner/EmDosBox/win-dosbox-sync.js.gz");
+        var nativeResolution = DosBoxLoader.nativeResolution(640, 480);
+        var fetchFile = DosBoxLoader.fetchFile("Game file", "https://playminigames.ru/content/gamebinary/zip_3d-pinball-space-cadet_f3bd15591beb40118613ade9d4d43b3f.zip");
+        var mountZip = DosBoxLoader.mountZip("c", fetchFile);
+        var fetchWinFile = DosBoxLoader.fetchFile("Game file", "https://playminigames.ru/content/emulators/emdosbox/win9x.zip");
+        var mountWinZip = DosBoxLoader.mountZip("d", fetchWinFile);
+
+        var startFile = DosBoxLoader.startExe("execute.bat");
+        var dosBoxLoader = new DosBoxLoader(emulatorJs, nativeResolution, mountZip, mountWinZip, startFile);
+        var onLoadcallBac = function() {
+            document.getElementById("dosbox-progress-indicator").style.display = 'none';
+            screen = $(canvas);
+            plusMinus.show();
+            fullscreenContainer.show();
+            calculateWidthHeight(0);
+        };
+        var emulator = new Emulator(document.querySelector("#canvas"), onLoadcallBac, dosBoxLoader, alternativeDosBoxConfig);
+    </body>
+</html>
